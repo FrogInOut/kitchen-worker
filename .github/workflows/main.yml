@@ -39,7 +39,7 @@ jobs:
 
     - name: Set JFrog CLI Config
       run: |
-            jf go-config --repo-resolve llpd-go-dev
+            jf go-config --repo-resolve llpd-go-dev --repo-deploy llpd-go-dev
 
     - name: build webapp
       run: |
