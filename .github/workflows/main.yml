@@ -39,7 +39,7 @@ jobs:
 
     - name: Set JFrog CLI Config
       run: |
-            jf c add rt-server --artifactory-url https://devreleplus.jfrog.io/artifactory --user yonatan --password ${{ steps.setup-cli.outputs.oidc-token }} --interactive=false
+            jf c add rt-server --artifactory-url https://devreleplus.jfrog.io/artifactory --user ${{ steps.setup-cli.outputs.oidc-user }} --password ${{ steps.setup-cli.outputs.oidc-token }} --interactive=false
             jf go-config --server-id-resolve rt-server --repo-resolve llpd-go-dev
 
     - name: build webapp
