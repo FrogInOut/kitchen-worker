@@ -44,7 +44,8 @@ jobs:
     - name: build webapp
       run: |
            jf go build 
-           jf gp "1.1.0"
+           VERSION="v0.0.0-$(date -u +%Y%m%d%H%M%S)-$(git rev-parse --short HEAD)"
+           jf gp "$VERSION"
     - name: Generate build timestamp
       id: date
       run: echo "date=$(date +'%Y-%m-%d-%H-%M-%S')" >> $GITHUB_OUTPUT
