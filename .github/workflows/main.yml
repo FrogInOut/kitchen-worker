@@ -38,13 +38,14 @@ jobs:
        JF_PROJECT: llpd
 
     - name: Set JFrog CLI Config
-      run: jf npm-config --global=true --repo-resolve=llpd-npm-dev --repo-deploy=llpd-npm-dev
+      run: |
+            jf c add rt-server --artifactory-url https://devreleplus.jfrog.io/artifactory --user yonatan --password ${{ steps.setup-cli.outputs.oidc-token }} --interactive=false
+            jf go-config --server-id-resolve rt-server --repo-resolve llpd-go-dev
 
     - name: build webapp
       run: |
-         jf npm ci
-         jf npm publish
-         npm run build
+           jf go build 
+           jf gp llpd-go-dev $(date +'%Y-%m-%d-%H-%M-%S') --server-id rt-server
     - name: Generate build timestamp
       id: date
       run: echo "date=$(date +'%Y-%m-%d-%H-%M-%S')" >> $GITHUB_OUTPUT
